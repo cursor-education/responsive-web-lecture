@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bootstrap Grid</title>
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/zenburn.css">
+    <style type="text/css">
+        .abbr i {
+            color: orange;
+            text-decoration: none;
+            text-transform: none;
+            font-style: normal;
+        }
+        .w-1-2 {
+            width: 48%;
+            float: left;
+        }
+        .reveal .demo h1 {
+            font-size: 24px;
+        }
+        .reveal .demo h2 {
+            font-size: 22px;
+        }
+        .reveal .demo h3 {
+            font-size: 20px;
+        }
+        .reveal .demo h4 {
+            font-size: 18px;
+        }
+        .reveal .demo h5 {
+            font-size: 16px;
+        }
+        .reveal .demo h6 {
+            font-size: 14px;
+        }
+        .reveal .demo p {
+            font-size: 16px;
+        }
+        .reveal .demo * {
+            text-transform: none;
+            text-align: left;
+            font-size: 16px;
+        }
+        .reveal .demo pre {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+        .reveal .demo ul,
+        .reveal .demo ol,
+        .reveal .demo dl {
+            margin: 0;
+            padding: 0;
+            padding-left: 20px;
+            float: left;
+        }
+        .reveal .demo ul ul,
+        .reveal .demo ol ul,
+        .reveal .demo ul ol,
+        .reveal .demo ol ol {
+            float: none;
+        }
+        .reveal .demo blockquote {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+        .reveal .demo {
+            border: 2px solid grey;
+            padding: 2%;
+            width: 34%;
+            margin-top: 20px;
+            position: relative;
+        }
+        .reveal .demo:before {
+            position: absolute;
+            content: 'demo.html';
+            display: block;
+            background: #4250ff;
+            height: 28px;
+            width: 100px;
+            top: -28px;
+            left: 0;
+            line-height: 28px;
+            font-size: 16px;
+            color: white;
+        }
+        .reveal .demo a {
+            float: left;
+        }
+        .reveal .demo table {
+            float: left;
+        }
+        .reveal .demo tr,
+        .reveal .demo td,
+        .reveal .demo th {
+            border: none;
+        }
+        .reveal .table-demo {
+            width: 100%;
+            border: #ccc solid 1px;
+            border-collapse: collapse;
+        }
+        .reveal .table-demo caption {
+            text-align: right;
+            font-size: 12px;
+            font-style: italic;
+            padding-right: 10px;
+        }
+        .reveal .table-demo th,
+        .reveal .table-demo td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        .reveal .demo form textarea {
+            float: left;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+        .reveal p {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section>
+                <h3>Responsive Web Design</h3>
+            </section>
+            <section>
+                <h3>Mobile website vs desktop</h3>
+
+                <p>The primary goal of mobile stylesheets is to alter the layout for a smaller display and to reduce bandwidth for slower mobile networks.</p>
+
+                <div data-markdown>
+                    <script type="text/template">
+                        ```html
+                        <link rel="stylesheet" href="site.css" media="screen" />
+                        <link rel="stylesheet" href="mobile.css" media="handheld" /> ```
+                    </script>
+                </div>
+                <img src="assets/img/cnn-regular-vs-mobile.jpg" alt="" />
+            </section>
+            <section>
+                <h3>The concept of responsive web design</h3>
+
+                <p>Responsive Web design is not only about adjustable screen resolutions and automatically resizable images, but rather about a whole new way of thinking about design.</p>
+
+                <img src="assets/img/responsive-design.png" alt="" />
+
+            </section>
+            <section>
+                <h3>Flexible everything</h3>
+
+                <p>"Responsive Web Design" by Ethan Marcotte May 25, 2010 at <a href="http://alistapart.com/article/responsive-web-design">alistapart.com</a>
+                    <p>
+                        <img src="assets/img/responsive-design-concept.jpg" alt="" />
+
+            </section>
+            <section>
+                <h3>Flexible images width</h3>
+
+                <p>The most popular option for working with images in responsive Web design is to use CSS’s max-width for an easy fix.</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```css img { max-width: 100%; width: auto; height: auto; } ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <img src="assets/img/image-scale.jpg" alt="" />
+            </section>
+            <section>
+                <h3>Group of images in different resolutions</h3>
+
+                <p>This technique requires a few image files in different resolutions loaded for different screen size. Image switching may be implemented with help of some javascript plugin or by back-end based solution.</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```html
+                        <img src="small.jpg" data-medium-src="med.jpg" data-large-src="large.jpg"> ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <img src="assets/img/responsive-images.jpg" alt="" />
+            </section>
+            <section>
+                <h3>HTML5 **picture** element</h3>
+
+                <p>`picture` element is a solution that is both complete and in need of no additional scripts or third-party services to do the job.</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```html
+                        <picture>
+                            <source media="(min-width: 64em)" src="high-res.jpg">
+                                <source media="(min-width: 37.5em)" src="med-res.jpg">
+                                    <source src="low-res.jpg">
+                                        <img src="fallback.jpg" alt="This picture loads on non-supporting browsers.">
+                                        <p>Accessible text.</p>
+                        </picture>
+                        ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <h3>Automatic page rescale on mobile devices</h3>
+
+                <p>On smartphones web designs automatically rescale to fit the tiny screen. A full-sized design, unless specified otherwise, would just shrink proportionally for the tiny browser. Then, the user could easily zoom in and out as necessary.</p>
+
+                <p>However, if your page style is optimized for mobile devices we need to tell the mobile device to display the page without any zooming.</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```html
+                        <meta name="viewport" content="width=device-width; initial-scale=1.0"> ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <img src="assets/img/iphone-website-scale.jpg" alt="" />
+            </section>
+            <section>
+                <h3>Custom layout structure</h3>
+
+                <p>For extreme size changes, we may want to change the layout altogether, either through a separate style sheet or, more efficiently, through a CSS media query.</p>
+            </section>
+            <section>
+                <img src="assets/img/moving-content.jpg" alt="" />
+
+            </section>
+            <section>
+                <h3> Media queries</h3>
+
+                <p>CSS3 supports all of the same media types as CSS 2.1, such as screen, print and handheld, but has added dozens of new media features, including `max-width`, `device-width`, `orientation` and `color`.</p>
+
+                <p>Media queries are supported by all modern browsers, no custom script is requred to make it work.</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```html
+                        <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 480px)" href="shetland.css" /> ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <p>Multiple media queries can also be dropped right into a single style sheet, which is the most efficient option when used:</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```css body { font-size: 10px; } /* Smartphones (portrait) */ @media only screen and (max-width : 320px) { body { font-size: 16px; } } /* Smartphones (portrait and landscape) */ @media only screen and (min-device-width : 320px) and (max-device-width : 480px) { .content { padding: 0 2rem; } } ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <h3>CSS3 media queries</h3>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```css @media screen and (min-width: 600px) { .hereIsMyClass { width: 30%; float: right; } } @media screen and (min-device-width: 768px) { .minimumiPadWidth { clear: both; margin-bottom: 2px solid #ccc; } } @media screen and (orientation: landscape) { .iPadLandscape { width: 30%; float: right; } } ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <h3>Showing or hiding content</h3>
+
+                <p>It is possible to shrink things proportionally and rearrange elements as necessary to make everything fit (reasonably well) as a screen gets smaller.</p>
+                <div class="w-1-2">
+                    <img src="assets/img/hide-content.jpg" alt="" />
+                </div>
+                <div class="w-1-2">
+                    <img src="assets/img/hide-content-2.jpg" alt="" />
+                </div>
+
+            </section>
+            <section>
+                <h3>Responsive layout design</h3>
+                <img src="assets/img/responsive.gif" alt="" />
+            </section>
+            <section>
+                <h3>Touchscreens vs. cursors</h3>
+
+                <p>Touchscreens obviously come with different design guidelines than purely cursor-based interaction, and the two have different capabilities as well. Touchscreens have no capability to display CSS hovers because there is no cursor; once the user touches the screen, they click.</p>
+                <img src="assets/img/click-touch.png" alt="" />
+            </section>
+            <section>
+                <h3>Retina displays</h3>
+
+                <p>Smartphone device manufacturers introduced double density pixel screens for creating sharper images on smaller screens. However, this some issues for designers and developers as images that are not optimized for high-resolution screen will look less than stellar.</p>
+                <img src="assets/img/retina-display.jpg" alt="" />
+            </section>
+            <section>
+                <h3>Retina displays</h3>
+                <img src="assets/img/retina-display-2.gif" alt="" />
+            </section>
+            <section>
+                <h3>Few coding techniques for retina displays</h3>
+
+                <p>Use media queries for high-res CSS styles</p>
+                <div data-markdown>
+                    <script type="text/template">
+                        ```css @media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) { /* High-res styles go here */ } ```
+                    </script>
+                </div>
+                Have two versions of your CSS sprites: standard dimensions and @2x
+                <div data-markdown>
+                    <script type="text/template">
+                        ```css @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { .logo{ background-image: url(assets/sprite@2x.png); background-size: 500px 500px; } } ```
+                    </script>
+                </div>
+            </section>
+            <section>
+                <img src="assets/img/sprites.jpg" alt="" />
+            </section>
+            <section>
+                <h3>“Mobile first” and “desktop first”</h3>
+                <img src="assets/img/mobile-first.png" alt="" />
+
+            </section>
+            <section>
+                <p>Progressive enhancement and graceful degradation</p>
+                <img src="assets/img/progressive-enhancement.jpg" alt="" />
+            </section>
+            <section>
+                <h3>Related resources</h3>
+                <ul>
+                    <li><a href="http://www.smashingmagazine.com/tag/css/">Tutorials at smashingmagazine.com</a>
+                    </li>
+                    <li><a href="http://pepelsbey.net/pres/clear-and-sharp/">Presentation about work with retina displays pepelsbey.net</a>
+                    </li>
+                    <li><a href="http://alistapart.com/article/responsive-web-design">The first famous article about responsive web design alistapart.com</a>
+                    </li>
+                    <li><a href="http://mediaqueri.es/">Responsive design inspiration at mediaqueri.es</a>
+                    </li>
+                    <li><a href="http://fredparke.com/blog/css-padding-trick-responsive-intrinsic-ratios">Image scaling trick with aspect ratio</a>
+                    </li>
+                    <ul>
+            </section>
+        </div>
+    </div>
+    <script src="js/reveal.js"></script>
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
+    <script>
+        Reveal.initialize({
+            history: true,
+            slideNumber: true,
+            dependencies: [{
+                src: 'lib/js/classList.js',
+                condition: function() {
+                    return !document.body.classList;
+                }
+            }, {
+                src: 'plugin/markdown/marked.js',
+                condition: function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src: 'plugin/markdown/markdown.js',
+                condition: function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback: function() {
+                    hljs.initHighlightingOnLoad();
+                }
+            }, {
+                src: 'plugin/notes/notes.js'
+            }]
+        });
+    </script>
+</body>
+
+</html>
